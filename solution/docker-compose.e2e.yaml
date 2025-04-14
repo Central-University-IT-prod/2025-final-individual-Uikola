@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: api-e2e
+    build: ./api
+    ports:
+      - "8081:8080" # Используем другой порт, чтобы не конфликтовать с основным сервисом
+    env_file:
+      - ./api/tests/e2e/e2e.env # Отдельный файл переменных окружения для тестов
+    depends_on:
+      db-test:
+        condition: service_healthy
+      minio-test:
+        condition: service_healthy
+    networks:
+      - e2e-network
+
+  db-test:
+    container_name: db-e2e
+    image: postgres:16.2-alpine3.19
+    ports:
+      - "5434:5432" # Порт для тестовой БД
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=root
+      - POSTGRES_DB=test
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root -d test -p 5432" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    tmpfs:
+      - /var/lib/postgresql/data # Временное хранение данных (без персистентности)
+    networks:
+      - e2e-network
+
+  redis-test:
+    container_name: redis-e2e
+    image: redis:latest
+    command: redis-server --requirepass password --port 6381
+    expose:
+      - 6381
+    tmpfs:
+      - /data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-a", "password", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - e2e-network
+
+  clickhouse-test:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse-e2e
+    ports:
+      - "9001:9000"
+      - "8124:8123"
+    environment:
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: password
+      CLICKHOUSE_DB: test
+    tmpfs:
+      - /var/lib/clickhouse
+    networks:
+      - e2e-network
+
+  minio-test:
+    image: bitnami/minio:latest
+    container_name: minio-e2e
+    environment:
+      MINIO_ROOT_USER: root-user
+      MINIO_ROOT_PASSWORD: root-password
+      MINIO_USE_SSL: false
+      MINIO_DEFAULT_BUCKETS: test-bucket
+    ports:
+      - "9101:9000"
+      - "9002:9001"
+    tmpfs:
+      - /data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - e2e-network
+
+networks:
+  e2e-network:
+    driver: bridge

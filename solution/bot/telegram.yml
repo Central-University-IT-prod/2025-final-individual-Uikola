@@ -1,0 +1,326 @@
+settings:
+  parse_mode: html
+  token_env: BOT_TOKEN
+  long_poller:
+    Timeout: 10
+
+commands:
+  /start: Перезапустить бота
+
+buttons:
+  core:hide:
+    unique: core_hide
+    callback_data: core_hide
+    text: '{{ text `hide` }}'
+
+  core:cancel:
+    unique: core_cancel
+    callback_data: core_cancel
+    text: '{{ text `cancel` }}'
+
+  core:back:
+    unique: core_back
+    callback_data: core_back
+    text: '{{ text `back` }}'
+
+  core:page_counter:
+    unique: core_pageCounter
+    callback_data: core_pageCounter
+    text: '📃 {{.Page}}/{{.PagesCount}}'
+
+  auth:client:
+    unique: auth_client
+    callback_data: auth_client
+    text: '{{ text `client` }}'
+
+  auth:advertiser:
+    unique: auth_advertiser
+    callback_data: auth_advertiser
+    text: '{{ text `advertiser` }}'
+
+  auth:back_to_menu:
+    unique: auth_backToMenu
+    callback_data: auth_backToMenu
+    text: '{{ text `back` }}'
+
+  main_menu:ads:
+    unique: mainMenu_ads
+    callback_data: mainMenu_ads
+    text: '{{ text `ads` }}'
+
+  ad:click:
+    unique: ad_click
+    callback_data: '{{.AdID}}'
+    text: '{{ text `ad_click` }}'
+
+  ad:next:
+    unique: ad_next
+    callback_data: ad_next
+    text: '{{ text `ad_next` }}'
+
+  main_menu:my_campaigns:
+    unique: mainMenu_myCampaigns
+    callback_data: mainMenu_myCampaigns
+    text: '{{ text `my_campaigns` }}'
+
+  advertiser:campaigns:next_page:
+    unique: advertiser_campaigns_nextPage
+    callback_data: '{{.Page}}'
+    text: '{{ text `next` }}'
+
+  advertiser:campaigns:prev_page:
+    unique: advertiser_campaigns_nextPage
+    callback_data: '{{.Page}}'
+    text: '{{ text `prev` }}'
+
+  advertiser:campaigns:back:
+    unique: advertisers_campaign_back
+    callback_data: '{{.Page}}'
+    text: '{{ text `back` }}'
+
+  campaigns:campaign:
+    unique: campaigns_campaign
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{if .IsOver}}{{text `over` }} {{end}}{{.Title}}'
+
+  campaigns:campaign:back:
+    unique: campaigns_campaign_back
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `back` }}'
+
+  campaign:update:
+    unique: campaign_update
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `campaign_update` }}'
+
+  campaign:update:back:
+    unique: campaign_update_back
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `back` }}'
+
+  campaign:update:impressions_limit:
+    unique: update_impLimit
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_impressions_limit` }}'
+
+  campaign:update:clicks_limit:
+    unique: update_clsLimit
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_clicks_limit` }}'
+
+  campaign:update:cost_per_impression:
+    unique: update_cpi
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_cost_per_impression` }}'
+
+  campaign:update:cost_per_click:
+    unique: update_cpc
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_cost_per_click` }}'
+
+  campaign:update:ad_title:
+    unique: update_adTitle
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_ad_title` }}'
+
+  update:ad_title:set_empty:
+    unique: update_adTitle_setEmpty
+    callback_data: update_adTitle_setEmpty
+    text: '{{ text `set_empty` }}'
+
+  campaign:update:ad_text:
+    unique: update_adText
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_ad_text` }}'
+
+  update:ad_text:set_empty:
+    unique: update_adText_setEmpty
+    callback_data: update_adText_setEmpty
+    text: '{{ text `set_empty` }}'
+
+  campaign:update:start_date:
+    unique: update_startDate
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_start_date` }}'
+
+  campaign:update:end_date:
+    unique: update_endDate
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_end_date` }}'
+
+  campaign:update:gender:
+    unique: update_gender
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_gender` }}'
+
+  update:gender:set_empty:
+    unique: update_gender_setEmpty
+    callback_data: update_gender_setEmpty
+    text: '{{ text `set_empty` }}'
+
+  campaign:update:location:
+    unique: update_location
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_location` }}'
+
+  update:location:set_empty:
+    unique: update_location_setEmpty
+    callback_data: update_location_setEmpty
+    text: '{{ text `set_empty` }}'
+
+  campaign:update:age_from:
+    unique: update_age_from
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_age_from` }}'
+
+  update:age_from:set_empty:
+    unique: update_ageFrom_setEmpty
+    callback_data: update_ageFrom_setEmpty
+    text: '{{ text `set_empty` }}'
+
+  campaign:update:age_to:
+    unique: update_age_to
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `update_age_to` }}'
+
+  update:age_to:set_empty:
+    unique: update_ageTo_setEmpty
+    callback_data: update_ageTo_setEmpty
+    text: '{{ text `set_empty` }}'
+
+  campaign:statistic:
+    unique: campaign_statistic
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `campaign_statistic` }}'
+
+  campaign:delete:
+    unique: campaign_delete
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `campaign_delete` }}'
+
+  campaign:delete:confirm:
+    unique: delete_confirm
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `confirm` }}'
+
+  campaign:delete:cancel:
+    unique: delete_cancel
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `cancel` }}'
+
+  campaign:back:
+    unique: advertiser_campaign_back
+    callback_data: '{{.ID}} {{.Page}}'
+    text: '{{ text `back` }}'
+
+  main_menu:create_campaign:
+    unique: mainMenu_createCampaign
+    callback_data: mainMenu_createCampaign
+    text: '{{ text `create_campaign` }}'
+
+  advertiser:create_campaign:targeting_gender_skip:
+    unique: targetingGenderSkip
+    callback_data: targetingGenderSkip
+    text: '{{ text `skip` }}'
+
+  advertiser:create_campaign:targeting_age_from_skip:
+    unique: targetingAgeFromSkip
+    callback_data: targetingAgeFromSkip
+    text: '{{ text `skip` }}'
+
+  advertiser:create_campaign:targeting_age_to_skip:
+    unique: targetingAgeToSkip
+    callback_data: targetingAgeToSkip
+    text: '{{ text `skip` }}'
+
+  advertiser:create_campaign:targeting_location_skip:
+    unique: targetingLocationSkip
+    callback_data: targetingLocationSkip
+    text: '{{ text `skip` }}'
+
+  advertiser:create_campaign:confirm:
+    unique: createCampaign_confirm
+    callback_data: createCampaign_confirm
+    text: '{{ text `create` }}'
+
+  advertiser:create_campaign:refill:
+    unique: createCampaign_refill
+    callback_data: createCampaign_refill
+    text: '{{ text `refill` }}'
+
+  main_menu:advertiser_statistic:
+    unique: advertiser_statistic
+    callback: advertiser_statistic
+    text: '{{ text `advertiser_statistic` }}'
+
+  main_menu:generate_ad_text:
+    unique: mainMenu_generateAdText
+    callback_data: mainMenu_generateAdText
+    text: '{{ text `generate_ad_text` }}'
+
+  generate_ad_text:context_skip:
+    unique: generateAdText_contextSkip
+    callback_data: generateAdText_contextSkip
+    text: '{{ text `skip` }}'
+
+  main_menu:logout:
+    unique: mainMenu_logout
+    callback_data: mainMenu_logout
+    text: '{{ text `logout` }}'
+
+  main_menu:back:
+    unique: mainMenu_back
+    callback_data: mainMenu_back
+    text: '{{ text `back` }}'
+
+markups:
+  core:hide:
+    - [ core:hide ]
+  core:back:
+    - [ core:back ]
+  auth:menu:
+    - [ auth:client ]
+    - [ auth:advertiser ]
+  auth:back_to_menu:
+    - [ auth:back_to_menu ]
+  main_menu:client:menu:
+    - [ main_menu:ads ]
+    - [ main_menu:logout ]
+  ad:menu:
+    - [ ad:click ]
+    - [ ad:next ]
+    - [ main_menu:back ]
+  clicked_ad:menu:
+    - [ ad:next ]
+    - [ main_menu:back ]
+  main_menu:advertiser:menu:
+    - [ main_menu:my_campaigns, main_menu:create_campaign ]
+    - [ main_menu:generate_ad_text ]
+    - [ main_menu:advertiser_statistic ]
+    - [ main_menu:logout ]
+  main_menu:back:
+    - [ main_menu:back ]
+  advertiser:create_campaign:confirm:
+    - [ advertiser:create_campaign:confirm ]
+    - [ advertiser:create_campaign:refill ]
+    - [ main_menu:back ]
+  advertiser:campaign:menu:
+    - [ campaign:update ]
+    - [ campaign:statistic ]
+    - [ campaign:delete ]
+    - [ advertiser:campaigns:back ]
+  campaigns:campaign:back:
+    - [ campaigns:campaign:back ]
+  campaign:update:menu:
+    - [ campaign:update:impressions_limit, campaign:update:clicks_limit ]
+    - [ campaign:update:cost_per_impression, campaign:update:cost_per_click ]
+    - [ campaign:update:ad_title, campaign:update:ad_text ]
+    - [ campaign:update:start_date, campaign:update:end_date ]
+    - [ campaign:update:gender, campaign:update:location ]
+    - [ campaign:update:age_from, campaign:update:age_to ]
+    - [ campaigns:campaign:back ]
+  campaign:delete:confirmation:
+    - [ campaign:delete:confirm ]
+    - [ campaign:delete:cancel ]
+  campaign:update:back:
+    - [ campaign:update:back ]

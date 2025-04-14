@@ -1,0 +1,14 @@
+apiVersion: 1
+
+providers:
+  - name: 'Ad Platform Metrics'
+    folder: 'Ad Platform'
+    type: file
+    orgId: 1
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/dashboards
+      foldersFromFilesStructure: true
